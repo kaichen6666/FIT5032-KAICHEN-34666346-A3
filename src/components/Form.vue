@@ -9,38 +9,54 @@
     <h2>Register</h2>
 
     <form @submit.prevent="submitForm">
-      <div class="mb-3">
-        <label class="form-label">Username</label>
-        <input
-          type="text"
-          v-model="formData.username"
-          class="form-control"
-          @blur="validateName(true)"
-        />
-        <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
+      <!-- 用户名和邮箱同一行 -->
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">Username</label>
+          <input
+            type="text"
+            v-model="formData.username"
+            class="form-control"
+            @blur="validateName(true)"
+          />
+          <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
+        </div>
+        <div class="col">
+          <label class="form-label">Email</label>
+          <input
+            type="email"
+            v-model="formData.email"
+            class="form-control"
+            @blur="validateEmail(true)"
+          />
+          <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
+        </div>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input
-          type="password"
-          v-model="formData.password"
-          class="form-control"
-          @blur="validatePassword(true)"
-        />
-        <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            v-model="formData.password"
+            class="form-control"
+            @blur="validatePassword(true)"
+          />
+          <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
+        </div>
+        <div class="col">
+          <label class="form-label">Confirm Password</label>
+          <input
+            type="password"
+            v-model="formData.confirmPassword"
+            class="form-control"
+            @blur="validateConfirmPassword(true)"
+          />
+          <div v-if="errors.confirmPassword" class="text-danger">{{ errors.confirmPassword }}</div>
+        </div>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input
-          type="email"
-          v-model="formData.email"
-          class="form-control"
-          @blur="validateEmail(true)"
-        />
-        <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
-      </div>
+      
 
       <div class="mb-3 form-check">
         <input
@@ -96,6 +112,7 @@ import { ref } from 'vue'
 const formData = ref({
   username: '',
   password: '',
+  confirmPassword: '',
   email: '',
   isAustralian: false,
   reason: '',
@@ -106,6 +123,7 @@ const formData = ref({
 const errors = ref({
   username: null,
   password: null,
+  confirmPassword: null,
   email: null,
   isAustralian: null,
   reason: null,
@@ -136,6 +154,7 @@ const clearForm = () => {
 const submitForm = () => {
   validateName(true)
   validatePassword(true)
+  validateConfirmPassword(true)
   validateEmail(true)
   validateResident(true)
   validateGender(true)
@@ -144,6 +163,7 @@ const submitForm = () => {
   if (
     !errors.value.username &&
     !errors.value.password &&
+    !errors.value.confirmPassword &&
     !errors.value.email &&
     !errors.value.isAustralian &&
     !errors.value.gender &&
@@ -176,6 +196,16 @@ const validatePassword = () => {
   else if (!/\d/.test(pw)) errors.value.password = 'Must include number'
   else if (!/[!@#$%^&*(),.?":{}|<>]/.test(pw)) errors.value.password = 'Must include special char'
   else errors.value.password = null
+}
+
+const validateConfirmPassword = () => {
+  if (!formData.value.confirmPassword) {
+    errors.value.confirmPassword = 'Confirm password is required'
+  } else if (formData.value.confirmPassword !== formData.value.password) {
+    errors.value.confirmPassword = 'Passwords do not match'
+  } else {
+    errors.value.confirmPassword = null
+  }
 }
 
 const validateEmail = () => {
