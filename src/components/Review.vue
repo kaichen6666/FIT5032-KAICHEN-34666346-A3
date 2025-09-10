@@ -76,6 +76,10 @@ const comment = ref('')
 const submitReview = () => {
   if (!rating.value) return alert('Please select a rating!')
 
+   // Validate comment length
+  if (comment.value.length > 200) return alert('Comment too long')
+
+
   const newReview = {
     user: props.currentUser,      // Current logged-in user
     target: props.target,         // Product being reviewed
