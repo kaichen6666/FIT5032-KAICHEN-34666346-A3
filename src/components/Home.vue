@@ -29,6 +29,12 @@
     <div class="text-center">
       <h1>Public health through nutrition education</h1>
       <!-- Homepage content -->
+
+      <AllReviews />
     </div>
   </div>
 </template>
+
+<script setup>
+import AllReviews from './AllReviews.vue'
+</script>

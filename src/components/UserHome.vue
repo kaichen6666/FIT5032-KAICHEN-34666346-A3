@@ -2,8 +2,15 @@
   <div class="user-home">
     <div class="header">
       <h1>User Homepage</h1>
-      <button class="btn btn-secondary" @click="$emit('logout')">Logout</button>
+      <div>
+        <!-- Return Home 按钮 -->
+        <button class="btn btn-outline-secondary me-2" @click="$emit('go-home')">
+          Return Home
+        </button>
+        <button class="btn btn-secondary" @click="$emit('logout')">Logout</button>
+      </div>
     </div>
+
 
     <p>This is the user's functional area.</p>
 

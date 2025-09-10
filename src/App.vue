@@ -50,11 +50,20 @@ const loginSuccess = (payload) => {
       @go-login="goTo('login')"
     />
 
-    <!-- 用户主页 -->
-    <UserHome v-else-if="currentPage === 'userHome'" @logout="goTo('home')" />
 
-    <!-- 管理员主页 -->
-    <AdminHome v-else-if="currentPage === 'adminHome'" @logout="goTo('home')" />
+
+    <!-- 用户主页 -->
+<UserHome 
+ v-else-if="currentPage === 'userHome'" 
+ @logout="goTo('home')"
+ @go-home="goTo('home')"
+/>
+
+<!-- 管理员主页 -->
+<AdminHome 
+  v-else-if="currentPage === 'adminHome'" 
+  @logout="goTo('home')"
+/>
   </main>
 </template>
 
