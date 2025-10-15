@@ -2,8 +2,8 @@
 import Mailgun from "mailgun-js";
 
 // —— 配置 —— 
-const apiKey = "2a599128f11fe3914e9658d1d718ebfb-556e0aa9-e075245c"; 
-const domain = "sandboxa48cd105f28c4f5e8930fa277d687237.mailgun.org"; 
+const apiKey = ""; 
+const domain = ""; 
 
 // 初始化 Mailgun
 const mailgun = Mailgun({ apiKey, domain });
